@@ -45,6 +45,53 @@
   <script src="static/js/bulma-carousel.min.js"></script>
   <script src="static/js/bulma-slider.min.js"></script>
   <script src="static/js/index.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // 1. Define scene → video mapping here
+      const scenes = {
+        "Lab": "https://cdn.pengpark.com/lab.mp4",
+        "Bicycle": "https://cdn.pengpark.com/bicycle.mp4"
+      };
+
+      const tabsContainer = document.getElementById('scene-tabs');
+      const videoElement = document.getElementById('scene-video');
+      const sourceElement = document.getElementById('scene-source');
+
+      // 2. Create a button for each scene
+      Object.entries(scenes).forEach(([name, url], index) => {
+        const btn = document.createElement('button');
+        btn.className = 'button is-info is-light scene-btn';
+        btn.dataset.src = url;
+        btn.textContent = name;
+        if (index === 0) btn.classList.add('is-active'); // default selection
+        tabsContainer.appendChild(btn);
+      });
+
+      // 3. Helper to switch video
+      const setVideo = (src) => {
+        sourceElement.src = src;
+        videoElement.load();
+        videoElement.play();
+      };
+
+      // 4. Initialise with the first scene
+      setVideo(Object.values(scenes)[0]);
+
+      // 5. Handle button clicks via event delegation
+      tabsContainer.addEventListener('click', (e) => {
+        if (!e.target.classList.contains('scene-btn')) return;
+
+        // update active styling
+        tabsContainer.querySelectorAll('.scene-btn').forEach(b => b.classList.remove('is-active'));
+        e.target.classList.add('is-active');
+
+        // switch video
+        setVideo(e.target.dataset.src);
+      });
+    });
+  </script>
+
 </head>
 
 <body>
@@ -258,6 +305,26 @@
               Your browser does not support the video tag.
             </video>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scene demo videos with auto‑generated buttons -->
+  <section class="section" id="scene-demos">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-4">
+        <h2 class="title is-3">Scene Demo Videos</h2>
+
+        <!-- Buttons will be injected here -->
+        <div class="buttons is-centered" id="scene-tabs"></div>
+
+        <!-- Video player -->
+        <div class="video-container" style="margin-top: 1rem;">
+          <video id="scene-video" controls muted loop width="100%">
+            <source id="scene-source" src="" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
         </div>
       </div>
     </div>

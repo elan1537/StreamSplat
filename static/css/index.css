@@ -1,6 +1,50 @@
 body {
   font-family: 'Noto Sans', sans-serif;
+  overflow-x: hidden;
 }
+
+html {
+  overflow-x: hidden;
+}
+
+/* 모든 컨테이너가 화면 너비를 초과하지 않도록 설정 */
+.container {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* 섹션별 스크롤 방지 - 세로 스크롤은 허용 */
+section {
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+
+/* 비디오 컨테이너가 화면을 벗어나지 않도록 설정 */
+.video-container {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.video-container video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* pre 태그가 화면을 벗어나지 않도록 설정 */
+pre {
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* columns가 화면을 벗어나지 않도록 설정 */
+.columns {
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+
+
 
 
 .footer .icon-link {
@@ -131,6 +175,103 @@ body {
 
 .eql-cntrb { 
   font-size: smaller;
+}
+
+/* 1024px 이하에서 비디오 배치를 위아래로 변경 */
+@media screen and (max-width: 1024px) {
+  /* JPEG와 H.264 비교 섹션의 두 비디오를 위아래로 배치 */
+  .section .columns .column.is-four-fifths .columns .column.is-half {
+    width: 100% !important;
+    margin-bottom: 2rem;
+  }
+  
+  .section .columns .column.is-four-fifths .columns .column.is-half:last-child {
+    margin-bottom: 0;
+  }
+  
+  /* JPEG와 H.264 비교 섹션의 내부 columns를 세로로 배치 */
+  .section .columns .column.is-four-fifths .columns {
+    flex-direction: column;
+  }
+  
+  /* BibTeX 섹션 크기 조정 */
+  .bibtex-section .container {
+    max-width: 90% !important;
+  }
+  
+  .bibtex-section pre {
+    font-size: 0.8rem;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+}
+
+/* 모든 화면 크기에서 컨테이너 최대 너비 제한 */
+.container.is-max-desktop {
+  max-width: 768px !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+}
+
+.column.is-four-fifths {
+  max-width: 768px !important;
+  width: 100% !important;
+}
+
+/* 768px 이하에서 컨텐츠 고정 */
+@media screen and (max-width: 768px) {
+  /* 폰트 크기 조정 */
+  body {
+    font-size: 14px;
+  }
+  
+  h1.title.is-1 {
+    font-size: 1.8rem !important;
+  }
+  
+  h2.title.is-3 {
+    font-size: 1.4rem !important;
+  }
+  
+  h3.title.is-4 {
+    font-size: 1.2rem !important;
+  }
+  
+  .is-size-5 {
+    font-size: 0.9rem !important;
+  }
+  
+  .is-size-4 {
+    font-size: 1rem !important;
+  }
+  
+  /* JPEG와 H.264 비교 섹션의 두 비디오를 위아래로 배치 */
+  .section .columns .column.is-four-fifths .columns .column.is-half {
+    width: 100% !important;
+    margin-bottom: 2rem;
+  }
+  
+  .section .columns .column.is-four-fifths .columns .column.is-half:last-child {
+    margin-bottom: 0;
+  }
+  
+  /* JPEG와 H.264 비교 섹션의 내부 columns를 세로로 배치 */
+  .section .columns .column.is-four-fifths .columns {
+    flex-direction: column;
+  }
+  
+  /* BibTeX 섹션 크기 조정 */
+  .bibtex-section .container {
+    max-width: 90% !important;
+  }
+  
+  .bibtex-section pre {
+    font-size: 0.8rem;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
 }
 
 
